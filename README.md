@@ -1,24 +1,28 @@
 # Harshit Srivastava — Portfolio
 
-A static personal portfolio for `https://subsavage.github.io`. It uses HTML, CSS and JavaScript with no framework, package manager, backend or build step.
+Static portfolio for `https://subsavage.github.io`, built from a small content file and HTML template. It has no framework, runtime JavaScript, backend, or third-party build dependencies.
 
-## Run locally
+## Build and preview
 
-Open `index.html` in a browser, or serve the repository root with any static file server. The optional Google Fonts stylesheet has system fallbacks.
+Requires Node.js 24 or newer. From the repository root:
 
-## Deploy to GitHub Pages
+```sh
+node build.mjs
+```
 
-All site files, including `index.html`, are at the repository root. Asset URLs are relative (`./styles.css`, `./assets/...`), which is appropriate for the root `username.github.io` site.
+The production site is written to `dist/`. Serve that directory with any static server to preview the generated page. The deployed HTML includes the experience, projects and skills in its initial source; it does not depend on browser-side rendering.
 
-1. In repository **Settings → Pages**, select **GitHub Actions** as the publishing source.
-2. The workflow at `.github/workflows/pages.yml` uploads the repository root and deploys it when changes are pushed to the default branch. It can also be run manually from the default branch.
-3. No dependency installation or production build command is required; the HTML, CSS, JavaScript and static assets are the production site.
+## Deploy
+
+The existing GitHub Pages Actions workflow builds the static output and deploys `dist/` from the repository's default branch. In **Settings → Pages**, choose **GitHub Actions** as the publishing source. No package install step is needed.
 
 ## Update content
 
-- Edit `content.js` for links, metrics, experience, product store links, projects, technical direction and skills.
-- Replace `assets/Harshit-Srivastava-Resume.pdf` with the current resume, keeping that filename or updating the path in `content.js` and `index.html`.
-- Add a project in the `projects` array in `content.js`; each project supports `title`, `kind`, `index`, `description`, `tags` and `details`. Extend `main.js` only when there is project media or case-study content ready to render.
-- `styles.css` contains the visual system and responsive rules. `index.html` contains the semantic page structure and metadata.
+- Edit `content.js` for profile details, links, proof points, experience, projects, technical direction and skills.
+- Edit `index.template.html` for page structure and metadata. `index.html` is also refreshed with rendered content by the build, so it can be previewed directly.
+- Edit `styles.css` for the visual system and responsive layout.
+- Replace `assets/Harshit-Srivastava-Resume.pdf` with the latest resume, keeping that filename or updating `content.js` and the header link in `index.html`.
+- Add a project to the `projects` array in `content.js`. Each project supports a title, status, description, tags and distinct technical detail.
+- `robots.txt` and `sitemap.xml` are copied into the production output by `build.mjs`.
 
-Keep personal contributions and company/product metrics clearly distinguished when updating the content.
+Run `node build.mjs` after content or template edits to refresh `dist/`.

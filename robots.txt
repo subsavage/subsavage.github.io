@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://subsavage.github.io/sitemap.xml
